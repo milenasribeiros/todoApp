@@ -2,11 +2,12 @@ import { View, Text, Button, FlatList, TouchableOpacity, StyleSheet } from 'reac
 import React, { useContext } from 'react'
 import StudyCardsContext from '../contexts/StudyCardsContext'
 
-const CardListScreen = ({navigation}) => {
-    const {cards, deleteCard} = useContext()
+const CardListScreen = ({ navigation }) => {
 
-    const inProgressCards = cards.filter(card => card.status === 'in-progress')
-    const concluidedCards = cards.filter(card => card.status === 'done')
+    const { cards, deleteCard } = useContext(StudyCardsContext)
+
+    const inProgressCards = cards.filter(card => card.status === 'in_progress')
+    const concludedCards = cards.filter(card => card.status === 'done')
     const backlogCards = cards.filter(card => card.status === 'backlog')
 
     const today = new Date()
@@ -16,10 +17,10 @@ const CardListScreen = ({navigation}) => {
         return diffInDays >= 0 && diffInDays <= 15
     })
 
-    const renderCard = ({item}) => (
-        <View style= {styles.card}>
-            <Text style={styles.cardTitle}>{item.title}</Text>
-            <Text>Status: {item.status}</Text>
+    const renderCard = ({ item }) => (
+      <View style={styles.card}>
+        <Text style={styles.cardTitle}>{item.title}</Text>
+        <Text>Status: {item.status}</Text>
         <Text>Data/Hora de Término: {new Date(item.dueDate).toLocaleString()}</Text>
         <View>
           <Button title='Editar' onPress={() => navigation.navigate('CardEdit', { id: item.id })} />
@@ -73,7 +74,7 @@ const styles = StyleSheet.create({
   container: {
       flex: 1,
       padding: 10,
-      backgroundColor: '#f9f9f9',
+      backgroundColor: '#000000',
   },
   dueSoonButton: {
       backgroundColor: '#ff4500',
@@ -136,6 +137,7 @@ const styles = StyleSheet.create({
       fontWeight: 'bold',
   },
   sectionTitle: {
+      backgroundColor: '#ffffff',
       fontSize: 20,
       fontWeight: 'bold',
       marginTop: 20,
@@ -148,4 +150,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default CardListScreen    
+export default CardListScreen
